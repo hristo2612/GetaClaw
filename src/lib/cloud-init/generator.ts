@@ -14,7 +14,9 @@ export interface CloudInitConfig {
 }
 
 export function generateAgentPort(): number {
-  return Math.floor(Math.random() * 30000) + 30000; // 30000-60000
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  return (array[0] % 30001) + 30000; // 30000-60000
 }
 
 export function generatePairingToken(): string {
